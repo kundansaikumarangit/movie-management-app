@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Movie</title>
+</head>
+<body>
+    <h2>Update Movie</h2>
+    <form th:action="@{/update-movie/{id}(id=${movie.id})}" th:object="${movie}" method="post">
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required />
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}" required></textarea>
+        </div>
+        <div>
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" th:field="*{duration}" min="1" required />
+        </div>
+        <div>
+            <label for="releaseYear">Release Year:</label>
+            <input type="number" id="releaseYear" th:field="*{releaseYear}" min="1888" required />
+        </div>
+        <div>
+            <label for="genre">Genre:</label>
+            <select id="genre" th:field="*{genre}">
+                <option 
+                    th:each="g : ${genres}" 
+                    th:value="${g.id}" 
+                    th:text="${g.name}"
+                    th:selected="${g.id == movie.genre?.id}"
+                ></option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Update Movie</button>
+        </div>
+    </form>
+</body>
+</html>

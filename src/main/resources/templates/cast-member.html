@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Cast Member</title>
+</head>
+<body>
+    <h2>Add a Cast Member</h2>
+    <form th:action="@{/castmembers/save}" th:object="${castMember}" method="post">
+        <div>
+            <label for="actorName">Actor Name:</label>
+            <input type="text" id="actorName" th:field="*{actorName}" required />
+        </div>
+        <div>
+            <label for="role">Role:</label>
+            <input type="text" id="role" th:field="*{role}" required />
+        </div>
+        <div>
+            <label for="movie">Movie:</label>
+            <select id="movie" th:field="*{movie}" required>
+                <option th:each="m : ${movies}" th:value="${m.id}" th:text="${m.title}"></option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Save Cast Member</button>
+        </div>
+    </form>
+</body>
+</html>
